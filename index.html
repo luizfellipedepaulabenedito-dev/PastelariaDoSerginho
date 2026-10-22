@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Pastel do Serginho • Pastel frito na hora em Carmo do Rio Claro</title>
+<meta name="description" content="Peça seu pastel frito na hora em Carmo do Rio Claro e receba pelo WhatsApp.">
+<meta name="theme-color" content="#d62828">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🥟</text></svg>">
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;700;800&family=Nunito:wght@400;700;800&display=swap" rel="stylesheet">
+<style>
+:root{--red:#d62828;--red2:#9d0208;--yel:#ffb703;--cream:#fff8ec;--ink:#2b1a12;--card:#fff;--mut:#7a6455;--line:#f0e2cc}
+@media(prefers-color-scheme:dark){:root{--cream:#1c120d;--ink:#fff3e0;--card:#2a1c14;--mut:#c4ab97;--line:#3d2a1e}}
+*{box-sizing:border-box;margin:0;-webkit-tap-highlight-color:transparent}
+html{scroll-behavior:smooth;scroll-padding-top:70px}
+body{font-family:Nunito,system-ui,sans-serif;background:var(--cream);color:var(--ink);padding-bottom:90px;overflow-x:hidden}
+h1,h2,h3,.bal{font-family:'Baloo 2',Nunito,sans-serif}
+button{font:inherit;cursor:pointer;border:0}
+.hero{position:relative;background:linear-gradient(135deg,var(--red),var(--red2) 70%);color:#fff;text-align:center;padding:calc(48px + env(safe-area-inset-top,0px)) 20px 90px;overflow:hidden}
+.hero:after{content:"";position:absolute;left:0;right:0;bottom:-1px;height:50px;background:var(--cream);clip-path:ellipse(60% 100% at 50% 100%)}
+.fl{position:absolute;font-size:34px;opacity:.22;animation:fl 9s linear infinite}
+@keyframes fl{from{transform:translateY(120%) rotate(0)}to{transform:translateY(-420px) rotate(360deg)}}
+.logo{font-size:84px;display:inline-block;animation:bob 2.4s ease-in-out infinite;filter:drop-shadow(0 8px 10px #0005)}
+@keyframes bob{50%{transform:translateY(-12px) rotate(-6deg)}}
+.hero h1{font-size:clamp(34px,8vw,58px);line-height:1;font-weight:800;text-shadow:0 3px 0 #0003}
+.hero p{margin:8px auto 18px;max-width:420px;opacity:.95;font-weight:700}
+.badges{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;position:relative;z-index:2}
+.badges a,.badges span{background:#fff2;border:1px solid #fff5;color:#fff;padding:8px 14px;border-radius:99px;font-weight:800;font-size:14px;text-decoration:none;backdrop-filter:blur(4px)}
+.tabs{position:sticky;top:0;z-index:20;display:flex;gap:8px;overflow-x:auto;padding:calc(10px + env(safe-area-inset-top,0px)) 14px 10px;background:var(--cream);box-shadow:0 4px 12px #0001;scrollbar-width:none}
+.tabs::-webkit-scrollbar{display:none}
+.tab{flex:none;padding:9px 16px;border-radius:99px;background:var(--card);color:var(--ink);border:2px solid var(--line);font-weight:800;transition:.2s}
+.tab.on{background:var(--red);color:#fff;border-color:var(--red);transform:scale(1.06)}
+main{max-width:760px;margin:0 auto;padding:10px 14px}
+.sec h2{font-size:28px;margin:26px 0 10px;display:flex;align-items:center;gap:10px}
+.sec h2:after{content:"";flex:1;height:3px;border-radius:3px;background:repeating-linear-gradient(90deg,var(--yel) 0 8px,transparent 8px 14px)}
+.p{display:flex;align-items:center;gap:12px;background:var(--card);border:2px solid var(--line);border-radius:20px;padding:14px;margin-bottom:10px;opacity:0;transform:translateY(24px);transition:.5s,border-color .2s}
+.p.in{opacity:1;transform:none}
+.p:hover{border-color:var(--yel)}
+.p .em{font-size:38px;width:58px;height:58px;display:grid;place-items:center;background:var(--cream);border-radius:16px;flex:none}
+.p .t{flex:1;min-width:0}.p h3{font-size:19px;line-height:1.1}.p small{color:var(--mut);display:block;margin:2px 0}
+.pr{font-weight:800;color:var(--red);font-size:18px}
+@media(prefers-color-scheme:dark){.pr{color:var(--yel)}}
+.add{background:var(--yel);color:#2b1a12;font-weight:800;padding:10px 16px;border-radius:14px;box-shadow:0 3px 0 #c98a00;transition:.15s}
+.add:active{transform:translateY(3px);box-shadow:none}
+.st{display:flex;align-items:center;gap:4px;background:var(--red);border-radius:14px;color:#fff;padding:3px}
+.st button{width:34px;height:34px;border-radius:11px;background:#fff3;color:#fff;font-size:20px;font-weight:800}
+.st b{min-width:24px;text-align:center}
+.fab{position:fixed;left:50%;bottom:calc(14px + env(safe-area-inset-bottom,0px));transform:translate(-50%,150%);z-index:30;width:min(92%,460px);background:#25d366;color:#fff;font-weight:800;font-size:17px;padding:15px 20px;border-radius:18px;display:flex;justify-content:space-between;box-shadow:0 10px 25px #0004;transition:.4s cubic-bezier(.3,1.5,.5,1)}
+.fab.show{transform:translate(-50%,0)}.fab.bump{animation:bump .35s}
+@keyframes bump{50%{transform:translate(-50%,0) scale(1.08)}}
+.ov{position:fixed;inset:0;background:#000a;z-index:40;display:none}.ov.on{display:block}
+.dr{position:fixed;z-index:50;left:50%;bottom:0;width:min(100%,560px);max-height:92vh;overflow:auto;background:var(--cream);border-radius:26px 26px 0 0;padding:20px 18px calc(24px + env(safe-area-inset-bottom,0px));transform:translate(-50%,105%);transition:.4s cubic-bezier(.2,.9,.3,1)}
+.dr.on{transform:translate(-50%,0)}
+.dr h2{font-size:26px;display:flex;justify-content:space-between}
+.x{background:var(--card);color:var(--ink);width:38px;height:38px;border-radius:50%;font-size:18px}
+.it{display:flex;gap:10px;align-items:center;padding:10px 0;border-bottom:1px dashed var(--line)}
+.it .t{flex:1}.it input{width:100%;margin-top:4px;font-size:13px;padding:6px 10px}
+label{display:block;font-weight:800;margin:12px 0 4px;font-size:14px}
+input,select,textarea{width:100%;padding:12px;border-radius:12px;border:2px solid var(--line);background:var(--card);color:var(--ink);font:inherit}
+input:focus,select:focus{outline:0;border-color:var(--yel)}
+.seg{display:flex;gap:8px}.seg button{flex:1;padding:12px;border-radius:12px;background:var(--card);border:2px solid var(--line);color:var(--ink);font-weight:800}
+.seg button.on{background:var(--red);color:#fff;border-color:var(--red)}
+.tot{display:flex;justify-content:space-between;font-size:24px;font-weight:800;margin:16px 0}
+.send{width:100%;background:#25d366;color:#fff;font-weight:800;font-size:19px;padding:16px;border-radius:16px;box-shadow:0 4px 0 #168a40}
+.send:disabled{opacity:.6}
+.info{background:var(--card);border:2px solid var(--line);border-radius:20px;padding:18px;margin:28px 0;line-height:1.8;font-weight:700}
+footer{text-align:center;color:var(--mut);font-size:13px;padding:10px 0 20px}
+footer a{color:inherit}
+.toast{position:fixed;top:calc(16px + env(safe-area-inset-top,0px));left:50%;transform:translate(-50%,-200%);background:var(--ink);color:var(--cream);padding:12px 20px;border-radius:99px;z-index:99;font-weight:800;transition:.4s}
+.toast.on{transform:translate(-50%,0)}
+.row{display:flex;gap:6px;margin:4px 0}.row>*{flex:1}.sm{padding:8px 12px;border-radius:10px;font-weight:800;flex:none;background:var(--yel);color:#2b1a12}.sm.r{background:var(--red);color:#fff}
+.tw{overflow-x:auto}table{width:100%;border-collapse:collapse}td,th{padding:8px;border-bottom:1px solid var(--line);text-align:right}th:first-child,td:first-child{text-align:left}
+.big{background:var(--red);color:#fff;border-radius:16px;padding:14px;margin:10px 0;text-align:center}.big b{font-size:30px;display:block}
+</style>
+</head>
+<body>
+<header class="hero" id="hero">
+  <div class="logo">🥟</div>
+  <h1>Pastel do Serginho</h1>
+  <p>Pastel frito na hora, crocante por fora e recheado de sabor 🔥</p>
+  <div class="badges">
+    <span>📍 Praça Dona Maria Goulart, 207 • Centro</span>
+    <a href="https://instagram.com/pastelariadoserginho" target="_blank" rel="noopener">📸 @pastelariadoserginho</a>
+    <a href="tel:+5535984215701">📞 (35) 98421-5701</a>
+  </div>
+</header>
+<nav class="tabs" id="tabs"></nav>
+<main>
+  <div id="menu"><p style="text-align:center;padding:40px">Carregando cardápio… 🥟</p></div>
+  <div class="info">
+    📍 <b>Onde estamos:</b> Praça Dona Maria Goulart, 207 (Chalé) — Centro, Carmo do Rio Claro/MG<br>
+    💬 <b>WhatsApp:</b> (35) 98421-5701<br>
+    🥤 Temos refrigerantes, cerveja, água e sucos<br>
+    ✅ Seu pedido vai direto para o nosso WhatsApp, é só enviar!
+  </div>
+</main>
+<footer>© Pastel do Serginho • <a href="#admin" id="adm">Área da loja</a></footer>
+
+<button class="fab" id="fab"><span id="fc">🛒 Ver pedido</span><span id="ft"></span></button>
+<div class="ov" id="ov"></div>
+
+<section class="dr" id="cart">
+  <h2>Seu pedido 🛒 <button class="x" data-close>✕</button></h2>
+  <div id="items"></div>
+  <label>Seu nome</label><input id="nome" placeholder="Como te chamamos?" autocomplete="name">
+  <label>Como quer receber?</label>
+  <div class="seg" id="tipo"><button class="on" data-v="Entrega">🛵 Entrega</button><button data-v="Retirada">🏪 Retirar no local</button></div>
+  <div id="endw"><label>Endereço de entrega</label><input id="end" placeholder="Rua, número, bairro e ponto de referência" autocomplete="street-address"></div>
+  <label>Pagamento</label>
+  <select id="pag"><option>Pix</option><option>Dinheiro</option><option>Cartão (maquininha)</option></select>
+  <div id="trw" style="display:none"><label>Troco para quanto?</label><input id="troco" inputmode="decimal" placeholder="Ex: 50"></div>
+  <label>Observação geral (opcional)</label><input id="obs" placeholder="Ex: sem cebola, caprichar no recheio">
+  <div class="tot"><span>Total</span><span id="tot"></span></div>
+  <button class="send" id="send">📲 Enviar pedido no WhatsApp</button>
+</section>
+
+<section class="dr" id="adminp"><h2>Área da loja ⚙️ <button class="x" data-close>✕</button></h2><div id="adb"></div></section>
+<div class="toast" id="toast"></div>
+
+<script>
+// ===== CONFIGURAÇÃO =====
+const WHATS='5535984215701', TAXA_ENTREGA=0;
+const SB='https://zylepafalufbnfnnlhsr.supabase.co';
+const KEY='eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Inp5bGVwYWZhbHVmYm5mbm5saHNyIiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTI2MTkzMDQsImV4cCI6MjEwODE5NTMwNH0.YMELbYWOkJbZdpY2z6aaRDNC4s2U0NFi38aESU05-DI';
+// ========================
+const $=s=>document.querySelector(s),R=n=>'R$ '+Number(n).toFixed(2).replace('.',',');
+const H={apikey:KEY,Authorization:'Bearer '+KEY,'Content-Type':'application/json'};
+const api=(p,o={})=>fetch(SB+'/rest/v1/'+p,{headers:H,...o}).then(async r=>{const t=await r.text();if(!r.ok)throw new Error(t);return t?JSON.parse(t):null});
+const rpc=(f,b)=>api('rpc/'+f,{method:'POST',body:JSON.stringify(b)});
+const toast=m=>{const t=$('#toast');t.textContent=m;t.classList.add('on');setTimeout(()=>t.classList.remove('on'),2600)};
+const esc=s=>String(s??'').replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+let cats=[],prods=[],cart={},tipo='Entrega',pin='',nivel='';
+const DEF=[['Pastéis Salgados','🥟',[['Frango',9],['Carne',9],['Queijo',9],['Pizza',9],['Calabresa',9],['Palmito',10],['Queijo, tomate e jiló',10]]],['Pastéis Doces','🍫',[['Chocolate',10],['Banana com canela',10],['Romeu e Julieta',10]]],['Bebidas','🥤',[['Refrigerante',6],['Suco',6],['Água',3],['Cerveja',9]]]];
+try{cart=JSON.parse(localStorage.getItem('psc')||'{}')}catch(e){}
+const save=()=>{try{localStorage.setItem('psc',JSON.stringify(cart))}catch(e){}};
+
+// partículas do herói
+for(let i=0;i<9;i++){const f=document.createElement('i');f.className='fl';f.textContent=['🥟','🔥','🧀','🍫','🍅'][i%5];f.style.cssText=`left:${i*11+2}%;animation-delay:${-i*1.1}s;animation-duration:${7+i%4*2}s`;$('#hero').prepend(f)}
+
+async function load(){
+  try{[cats,prods]=await Promise.all([api('categorias?select=*&order=ordem'),api('produtos?select=*&ativo=eq.true&order=nome')])}
+  catch(e){let id=0;cats=DEF.map((d,i)=>({id:i+1,nome:d[0],emoji:d[1]}));prods=DEF.flatMap((d,i)=>d[2].map(p=>({id:'d'+(id++),categoria_id:i+1,nome:p[0],preco:p[1],descricao:''})))}
+  render();
+}
+function render(){
+  $('#tabs').innerHTML=cats.filter(c=>prods.some(p=>p.categoria_id==c.id)).map((c,i)=>`<button class="tab${i?'':' on'}" data-c="${c.id}">${c.emoji} ${esc(c.nome)}</button>`).join('');
+  $('#menu').innerHTML=cats.map(c=>{const l=prods.filter(p=>p.categoria_id==c.id);return l.length?`<section class="sec" id="c${c.id}"><h2>${c.emoji} ${esc(c.nome)}</h2>${l.map(card).join('')}</section>`:''}).join('');
+  obs();upd();
+}
+const card=p=>{const q=cart[p.id]?.q||0;const em=cats.find(c=>c.id==p.categoria_id)?.emoji||'🥟';
+return `<div class="p"><div class="em">${em}</div><div class="t"><h3>${esc(p.nome)}</h3><small>${esc(p.descricao)}</small><span class="pr">${R(p.preco)}</span></div><div data-p="${p.id}">${ctl(p.id,q)}</div></div>`};
+const ctl=(id,q)=>q?`<div class="st"><button data-m="${id}">−</button><b>${q}</b><button data-a="${id}">+</button></div>`:`<button class="add" data-a="${id}">+ Adicionar</button>`;
+function obs(){const io=new IntersectionObserver(e=>e.forEach(x=>{if(x.isIntersecting){x.target.classList.add('in');io.unobserve(x.target)}}),{threshold:.1});document.querySelectorAll('.p').forEach((e,i)=>{e.style.transitionDelay=(i%4)*60+'ms';io.observe(e)})}
+function chg(id,d){const p=prods.find(x=>x.id==id);if(!p)return;const c=cart[id]||(cart[id]={q:0,n:'',p:p.preco,nome:p.nome});c.q+=d;if(c.q<=0)delete cart[id];save();upd();const w=document.querySelector(`[data-p="${id}"]`);if(w)w.innerHTML=ctl(id,cart[id]?.q||0);if(d>0){const f=$('#fab');f.classList.remove('bump');void f.offsetWidth;f.classList.add('bump')}}
+const sub=()=>Object.values(cart).reduce((s,c)=>s+c.q*c.p,0),qtd=()=>Object.values(cart).reduce((s,c)=>s+c.q,0);
+function upd(){const n=qtd();$('#fab').classList.toggle('show',n>0);$('#fc').textContent=`🛒 Ver pedido (${n})`;$('#ft').textContent=R(sub());
+  $('#items').innerHTML=Object.entries(cart).map(([id,c])=>`<div class="it"><div class="t"><b>${esc(c.nome)}</b><br><span class="pr">${R(c.q*c.p)}</span><input data-n="${id}" placeholder="Observação (ex: sem cebola)" value="${esc(c.n)}"></div><div class="st"><button data-m="${id}">−</button><b>${c.q}</b><button data-a="${id}">+</button></div></div>`).join('')||'<p style="padding:20px;text-align:center">Seu carrinho está vazio 🥺</p>';
+  $('#tot').textContent=R(sub()+(tipo=='Entrega'?TAXA_ENTREGA:0))}
+const open=e=>{$('#ov').classList.add('on');e.classList.add('on')},closeAll=()=>document.querySelectorAll('.dr,.ov').forEach(e=>e.classList.remove('on'));
+
+document.addEventListener('click',e=>{
+  const t=e.target.closest('button,a');if(!t)return;
+  if(t.dataset.a)chg(t.dataset.a,1);if(t.dataset.m)chg(t.dataset.m,-1);
+  if(t.dataset.c)document.getElementById('c'+t.dataset.c)?.scrollIntoView(),document.querySelectorAll('.tab').forEach(b=>b.classList.toggle('on',b==t));
+  if(t.id=='fab'){upd();open($('#cart'))}
+  if(t.dataset.close!==undefined)closeAll();
+  if(t.parentNode.id=='tipo'){tipo=t.dataset.v;[...t.parentNode.children].forEach(b=>b.classList.toggle('on',b==t));$('#endw').style.display=tipo=='Entrega'?'':'none';upd()}
+});
+$('#ov').onclick=closeAll;
+$('#cart').addEventListener('input',e=>{if(e.target.dataset.n){cart[e.target.dataset.n].n=e.target.value;save()}});
+$('#pag').onchange=e=>$('#trw').style.display=e.target.value=='Dinheiro'?'':'none';
+
+$('#send').onclick=async()=>{
+  const nome=$('#nome').value.trim(),end=$('#end').value.trim();
+  if(!qtd())return toast('Adicione algum item 🥟');
+  if(!nome)return toast('Digite seu nome 🙂');
+  if(tipo=='Entrega'&&!end)return toast('Digite o endereço de entrega 📍');
+  const s=sub(),total=s+(tipo=='Entrega'?TAXA_ENTREGA:0),pag=$('#pag').value,tr=$('#troco').value.trim();
+  const L='━━━━━━━━━━━━━━';
+  let m=`🥟 *NOVO PEDIDO — Pastel do Serginho*\n${L}\n👤 *Cliente:* ${nome}\n📦 *Tipo:* ${tipo}\n`;
+  if(tipo=='Entrega')m+=`📍 *Endereço:* ${end}\n`;
+  m+=`${L}\n*🧾 ITENS*\n`;
+  Object.values(cart).forEach(c=>{m+=`▪️ *${c.q}x* ${c.nome} — ${R(c.q*c.p)}\n`;if(c.n)m+=`     ↳ _${c.n}_\n`});
+  if($('#obs').value.trim())m+=`\n📝 *Obs:* ${$('#obs').value.trim()}\n`;
+  m+=`${L}\n`;if(tipo=='Entrega'&&TAXA_ENTREGA)m+=`🛵 Entrega: ${R(TAXA_ENTREGA)}\n`;
+  m+=`💰 *TOTAL: ${R(total)}*\n💳 *Pagamento:* ${pag}`;if(pag=='Dinheiro'&&tr)m+=` (troco p/ R$ ${tr})`;
+  m+=`\n${L}\n_Pedido feito pelo site_ ✅`;
+  const b=$('#send');b.disabled=true;b.textContent='Enviando…';
+  // registra no Supabase (comissão de 5% calculada no banco)
+  try{await api('pedidos',{method:'POST',headers:{...H,Prefer:'return=minimal'},body:JSON.stringify({cliente:nome,tipo,endereco:tipo=='Entrega'?end:null,pagamento:pag,subtotal:s,itens:Object.values(cart)})})}catch(e){console.warn(e)}
+  window.open(`https://wa.me/${WHATS}?text=${encodeURIComponent(m)}`,'_blank');
+  cart={};save();upd();render();closeAll();b.disabled=false;b.textContent='📲 Enviar pedido no WhatsApp';toast('Pedido enviado! Obrigado 🥟❤️');
+};
+
+// ===== ÁREA DA LOJA =====
+function admin(){$('#adb').innerHTML=`<label>PIN de acesso</label><input id="pin" type="password" inputmode="numeric" placeholder="••••"><br><br><button class="send" style="background:var(--red);box-shadow:0 4px 0 var(--red2)" id="go">Entrar</button>`;open($('#adminp'));
+  $('#go').onclick=async()=>{pin=$('#pin').value;try{nivel=await rpc('admin_nivel',{p_pin:pin});}catch(e){nivel=null}if(!nivel)return toast('PIN inválido');panel()}}
+$('#adm').onclick=e=>{e.preventDefault();admin()};if(location.hash=='#admin')admin();
+async function panel(){
+  let all=await api('produtos?select=*&order=nome');
+  let h=`<h3>➕ Produto</h3><input type="hidden" id="pid"><div class="row"><input id="pn" placeholder="Nome"><input id="pp" inputmode="decimal" placeholder="Preço"></div><input id="pd" placeholder="Descrição"><div class="row"><select id="pc">${cats.map(c=>`<option value="${c.id}">${c.emoji} ${esc(c.nome)}</option>`).join('')}</select><select id="pa"><option value="true">Disponível</option><option value="false">Esgotado</option></select></div><button class="send" id="ps" style="background:var(--red);box-shadow:0 4px 0 var(--red2)">Salvar produto</button>
+  <h3 style="margin-top:18px">➕ Nova seção</h3><div class="row"><input id="cn" placeholder="Ex: Combos"><input id="ce" placeholder="Emoji" style="max-width:80px"><button class="sm" id="cs">Criar</button></div>
+  <h3 style="margin-top:18px">📋 Produtos</h3>`+all.map(p=>`<div class="it"><div class="t"><b>${esc(p.nome)}</b> ${p.ativo?'':'🚫'}<br><span class="pr">${R(p.preco)}</span> <small>${esc(cats.find(c=>c.id==p.categoria_id)?.nome||'')}</small></div><button class="sm" data-e="${p.id}">Editar</button><button class="sm r" data-d="${p.id}">🗑</button></div>`).join('');
+  if(nivel=='dev'){try{const r=await rpc('dev_resumo',{p_pin:pin}),m0=new Date().toISOString().slice(0,7);const cur=r.find(x=>x.mes.slice(0,7)==m0);
+    h=`<div class="big">💰 Comissão do mês (5%)<b>${R(cur?.comissao||0)}</b>${cur?.pedidos||0} pedidos • vendas ${R(cur?.vendas||0)}</div><div class="tw"><table><tr><th>Mês</th><th>Pedidos</th><th>Vendas</th><th>5%</th></tr>${r.map(x=>`<tr><td>${x.mes.slice(5,7)}/${x.mes.slice(0,4)}</td><td>${x.pedidos}</td><td>${R(x.vendas)}</td><td><b>${R(x.comissao)}</b></td></tr>`).join('')}</table></div><hr style="margin:16px 0">`+h}catch(e){}}
+  $('#adb').innerHTML=h;
+  $('#ps').onclick=async()=>{try{await rpc('admin_produto_salvar',{p_pin:pin,p_id:$('#pid').value||null,p_nome:$('#pn').value,p_desc:$('#pd').value,p_preco:parseFloat($('#pp').value.replace(',','.')),p_cat:+$('#pc').value,p_ativo:$('#pa').value=='true'});toast('Salvo ✅');await load();panel()}catch(e){toast('Preencha nome e preço')}};
+  $('#cs').onclick=async()=>{if(!$('#cn').value)return;await rpc('admin_categoria_criar',{p_pin:pin,p_nome:$('#cn').value,p_emoji:$('#ce').value});toast('Seção criada ✅');await load();panel()};
+  $('#adb').onclick=async e=>{const b=e.target.closest('[data-e],[data-d]');if(!b)return;
+    if(b.dataset.d&&confirm('Excluir este produto?')){await rpc('admin_produto_excluir',{p_pin:pin,p_id:b.dataset.d});toast('Excluído');await load();panel()}
+    if(b.dataset.e){const p=all.find(x=>x.id==b.dataset.e);$('#pid').value=p.id;$('#pn').value=p.nome;$('#pp').value=p.preco;$('#pd').value=p.descricao;$('#pc').value=p.categoria_id;$('#pa').value=String(p.ativo);$('#pn').scrollIntoView({behavior:'smooth'})}};
+}
+load();
+</script>
+</body>
+</html>
