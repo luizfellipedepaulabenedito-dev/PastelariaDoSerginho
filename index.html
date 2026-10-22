@@ -37,6 +37,8 @@ main{max-width:760px;margin:0 auto;padding:10px 14px}
 .p.in{opacity:1;transform:none}
 .p:hover{border-color:var(--yel)}
 .p .em{font-size:38px;width:58px;height:58px;display:grid;place-items:center;background:var(--cream);border-radius:16px;flex:none}
+.p .em.f{width:84px;height:84px;padding:0;overflow:hidden}.p .em img{width:100%;height:100%;object-fit:cover;transition:.4s}.p:hover .em img{transform:scale(1.1)}
+#pv{width:100%;max-height:150px;object-fit:cover;border-radius:12px;margin:6px 0;display:none}
 .p .t{flex:1;min-width:0}.p h3{font-size:19px;line-height:1.1}.p small{color:var(--mut);display:block;margin:2px 0}
 .pr{font-weight:800;color:var(--red);font-size:18px}
 @media(prefers-color-scheme:dark){.pr{color:var(--yel)}}
@@ -129,7 +131,7 @@ const api=(p,o={})=>fetch(SB+'/rest/v1/'+p,{headers:H,...o}).then(async r=>{cons
 const rpc=(f,b)=>api('rpc/'+f,{method:'POST',body:JSON.stringify(b)});
 const toast=m=>{const t=$('#toast');t.textContent=m;t.classList.add('on');setTimeout(()=>t.classList.remove('on'),2600)};
 const esc=s=>String(s??'').replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
-let cats=[],prods=[],cart={},tipo='Entrega',pin='',nivel='';
+let foto='',cats=[],prods=[],cart={},tipo='Entrega',pin='',nivel='';
 const DEF=[['Pastéis Salgados','🥟',[['Frango',9],['Carne',9],['Queijo',9],['Pizza',9],['Calabresa',9],['Palmito',10],['Queijo, tomate e jiló',10]]],['Pastéis Doces','🍫',[['Chocolate',10],['Banana com canela',10],['Romeu e Julieta',10]]],['Bebidas','🥤',[['Refrigerante',6],['Suco',6],['Água',3],['Cerveja',9]]]];
 try{cart=JSON.parse(localStorage.getItem('psc')||'{}')}catch(e){}
 const save=()=>{try{localStorage.setItem('psc',JSON.stringify(cart))}catch(e){}};
@@ -148,7 +150,7 @@ function render(){
   obs();upd();
 }
 const card=p=>{const q=cart[p.id]?.q||0;const em=cats.find(c=>c.id==p.categoria_id)?.emoji||'🥟';
-return `<div class="p"><div class="em">${em}</div><div class="t"><h3>${esc(p.nome)}</h3><small>${esc(p.descricao)}</small><span class="pr">${R(p.preco)}</span></div><div data-p="${p.id}">${ctl(p.id,q)}</div></div>`};
+return `<div class="p">${p.foto?`<div class="em f"><img src="${p.foto}" alt="${esc(p.nome)}" loading="lazy"></div>`:`<div class="em">${em}</div>`}<div class="t"><h3>${esc(p.nome)}</h3><small>${esc(p.descricao)}</small><span class="pr">${R(p.preco)}</span></div><div data-p="${p.id}">${ctl(p.id,q)}</div></div>`};
 const ctl=(id,q)=>q?`<div class="st"><button data-m="${id}">−</button><b>${q}</b><button data-a="${id}">+</button></div>`:`<button class="add" data-a="${id}">+ Adicionar</button>`;
 function obs(){const io=new IntersectionObserver(e=>e.forEach(x=>{if(x.isIntersecting){x.target.classList.add('in');io.unobserve(x.target)}}),{threshold:.1});document.querySelectorAll('.p').forEach((e,i)=>{e.style.transitionDelay=(i%4)*60+'ms';io.observe(e)})}
 function chg(id,d){const p=prods.find(x=>x.id==id);if(!p)return;const c=cart[id]||(cart[id]={q:0,n:'',p:p.preco,nome:p.nome});c.q+=d;if(c.q<=0)delete cart[id];save();upd();const w=document.querySelector(`[data-p="${id}"]`);if(w)w.innerHTML=ctl(id,cart[id]?.q||0);if(d>0){const f=$('#fab');f.classList.remove('bump');void f.offsetWidth;f.classList.add('bump')}}
@@ -196,19 +198,23 @@ $('#send').onclick=async()=>{
 function admin(){$('#adb').innerHTML=`<label>PIN de acesso</label><input id="pin" type="password" inputmode="numeric" placeholder="••••"><br><br><button class="send" style="background:var(--red);box-shadow:0 4px 0 var(--red2)" id="go">Entrar</button>`;open($('#adminp'));
   $('#go').onclick=async()=>{pin=$('#pin').value;try{nivel=await rpc('admin_nivel',{p_pin:pin});}catch(e){nivel=null}if(!nivel)return toast('PIN inválido');panel()}}
 $('#adm').onclick=e=>{e.preventDefault();admin()};if(location.hash=='#admin')admin();
-async function panel(){
+const comprimir=f=>new Promise(res=>{const r=new FileReader();r.onload=()=>{const i=new Image();i.onload=()=>{const k=Math.min(1,520/Math.max(i.width,i.height)),c=document.createElement('canvas');c.width=i.width*k;c.height=i.height*k;c.getContext('2d').drawImage(i,0,0,c.width,c.height);res(c.toDataURL('image/jpeg',.75))};i.src=r.result};r.readAsDataURL(f)});
+function pv(){$('#pv').src=foto;$('#pv').style.display=foto?'block':'none';$('#pr').style.display=foto?'':'none'}
+async function panel(){foto='';
   let all=await api('produtos?select=*&order=nome');
-  let h=`<h3>➕ Produto</h3><input type="hidden" id="pid"><div class="row"><input id="pn" placeholder="Nome"><input id="pp" inputmode="decimal" placeholder="Preço"></div><input id="pd" placeholder="Descrição"><div class="row"><select id="pc">${cats.map(c=>`<option value="${c.id}">${c.emoji} ${esc(c.nome)}</option>`).join('')}</select><select id="pa"><option value="true">Disponível</option><option value="false">Esgotado</option></select></div><button class="send" id="ps" style="background:var(--red);box-shadow:0 4px 0 var(--red2)">Salvar produto</button>
+  let h=`<h3>➕ Produto</h3><input type="hidden" id="pid"><div class="row"><input id="pn" placeholder="Nome"><input id="pp" inputmode="decimal" placeholder="Preço"></div><input id="pd" placeholder="Descrição"><label>📷 Foto do produto</label><input id="pf" type="file" accept="image/*"><img id="pv" alt=""><button class="sm r" id="pr" style="display:none">Remover foto</button><div class="row"><select id="pc">${cats.map(c=>`<option value="${c.id}">${c.emoji} ${esc(c.nome)}</option>`).join('')}</select><select id="pa"><option value="true">Disponível</option><option value="false">Esgotado</option></select></div><button class="send" id="ps" style="background:var(--red);box-shadow:0 4px 0 var(--red2)">Salvar produto</button>
   <h3 style="margin-top:18px">➕ Nova seção</h3><div class="row"><input id="cn" placeholder="Ex: Combos"><input id="ce" placeholder="Emoji" style="max-width:80px"><button class="sm" id="cs">Criar</button></div>
   <h3 style="margin-top:18px">📋 Produtos</h3>`+all.map(p=>`<div class="it"><div class="t"><b>${esc(p.nome)}</b> ${p.ativo?'':'🚫'}<br><span class="pr">${R(p.preco)}</span> <small>${esc(cats.find(c=>c.id==p.categoria_id)?.nome||'')}</small></div><button class="sm" data-e="${p.id}">Editar</button><button class="sm r" data-d="${p.id}">🗑</button></div>`).join('');
   if(nivel=='dev'){try{const r=await rpc('dev_resumo',{p_pin:pin}),m0=new Date().toISOString().slice(0,7);const cur=r.find(x=>x.mes.slice(0,7)==m0);
     h=`<div class="big">💰 Comissão do mês (5%)<b>${R(cur?.comissao||0)}</b>${cur?.pedidos||0} pedidos • vendas ${R(cur?.vendas||0)}</div><div class="tw"><table><tr><th>Mês</th><th>Pedidos</th><th>Vendas</th><th>5%</th></tr>${r.map(x=>`<tr><td>${x.mes.slice(5,7)}/${x.mes.slice(0,4)}</td><td>${x.pedidos}</td><td>${R(x.vendas)}</td><td><b>${R(x.comissao)}</b></td></tr>`).join('')}</table></div><hr style="margin:16px 0">`+h}catch(e){}}
   $('#adb').innerHTML=h;
-  $('#ps').onclick=async()=>{try{await rpc('admin_produto_salvar',{p_pin:pin,p_id:$('#pid').value||null,p_nome:$('#pn').value,p_desc:$('#pd').value,p_preco:parseFloat($('#pp').value.replace(',','.')),p_cat:+$('#pc').value,p_ativo:$('#pa').value=='true'});toast('Salvo ✅');await load();panel()}catch(e){toast('Preencha nome e preço')}};
+  $('#pf').onchange=async e=>{if(e.target.files[0]){foto=await comprimir(e.target.files[0]);pv()}};
+  $('#pr').onclick=()=>{foto='';$('#pf').value='';pv()};
+  $('#ps').onclick=async()=>{try{await rpc('admin_produto_salvar',{p_pin:pin,p_id:$('#pid').value||null,p_nome:$('#pn').value,p_desc:$('#pd').value,p_preco:parseFloat($('#pp').value.replace(',','.')),p_cat:+$('#pc').value,p_ativo:$('#pa').value=='true',p_foto:foto||null});toast('Salvo ✅');await load();panel()}catch(e){toast('Preencha nome e preço')}};
   $('#cs').onclick=async()=>{if(!$('#cn').value)return;await rpc('admin_categoria_criar',{p_pin:pin,p_nome:$('#cn').value,p_emoji:$('#ce').value});toast('Seção criada ✅');await load();panel()};
   $('#adb').onclick=async e=>{const b=e.target.closest('[data-e],[data-d]');if(!b)return;
     if(b.dataset.d&&confirm('Excluir este produto?')){await rpc('admin_produto_excluir',{p_pin:pin,p_id:b.dataset.d});toast('Excluído');await load();panel()}
-    if(b.dataset.e){const p=all.find(x=>x.id==b.dataset.e);$('#pid').value=p.id;$('#pn').value=p.nome;$('#pp').value=p.preco;$('#pd').value=p.descricao;$('#pc').value=p.categoria_id;$('#pa').value=String(p.ativo);$('#pn').scrollIntoView({behavior:'smooth'})}};
+    if(b.dataset.e){const p=all.find(x=>x.id==b.dataset.e);$('#pid').value=p.id;$('#pn').value=p.nome;$('#pp').value=p.preco;$('#pd').value=p.descricao;$('#pc').value=p.categoria_id;$('#pa').value=String(p.ativo);foto=p.foto||'';pv();$('#pn').scrollIntoView({behavior:'smooth'})}};
 }
 load();
 </script>
