@@ -121,7 +121,7 @@ footer a{color:inherit}
 
 <script>
 // ===== CONFIGURAÇÃO =====
-const WHATS='5535984215701', TAXA_ENTREGA=0;
+const WHATS='5535984215701', TAXA_ENTREGA=5;
 const SB='https://zylepafalufbnfnnlhsr.supabase.co';
 const KEY='eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Inp5bGVwYWZhbHVmYm5mbm5saHNyIiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTI2MTkzMDQsImV4cCI6MjEwODE5NTMwNH0.YMELbYWOkJbZdpY2z6aaRDNC4s2U0NFi38aESU05-DI';
 // ========================
@@ -195,7 +195,7 @@ $('#send').onclick=async()=>{
 };
 
 // ===== ÁREA DA LOJA =====
-function admin(){$('#adb').innerHTML=`<label>PIN de acesso</label><input id="pin" type="password" inputmode="numeric" placeholder="••••"><br><br><button class="send" style="background:var(--red);box-shadow:0 4px 0 var(--red2)" id="go">Entrar</button>`;open($('#adminp'));
+function admin(){$('#adb').innerHTML=`<label>PIN de acesso</label><input id="pin" type="password" inputmode="numeric" placeholder="2704"><br><br><button class="send" style="background:var(--red);box-shadow:0 4px 0 var(--red2)" id="go">Entrar</button>`;open($('#adminp'));
   $('#go').onclick=async()=>{pin=$('#pin').value;try{nivel=await rpc('admin_nivel',{p_pin:pin});}catch(e){nivel=null}if(!nivel)return toast('PIN inválido');panel()}}
 $('#adm').onclick=e=>{e.preventDefault();admin()};if(location.hash=='#admin')admin();
 const comprimir=f=>new Promise(res=>{const r=new FileReader();r.onload=()=>{const i=new Image();i.onload=()=>{const k=Math.min(1,520/Math.max(i.width,i.height)),c=document.createElement('canvas');c.width=i.width*k;c.height=i.height*k;c.getContext('2d').drawImage(i,0,0,c.width,c.height);res(c.toDataURL('image/jpeg',.75))};i.src=r.result};r.readAsDataURL(f)});
